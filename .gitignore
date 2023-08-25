@@ -1,0 +1,11 @@
+
+Fourcastnet_model_for_copy/model_weight
+Fourcastnet_model_for_copy/__pycache__
+Fourcastnet_model_for_copy/input_data
+Fourcastnet_model_for_copy/model.py
+
+Pangu-Weather-for-copy/.ipynb_checkpoints
+Pangu-Weather-for-copy/.venv
+Pangu-Weather-for-copy/pangu_weather*
+Pangu-Weather-for-copy/pseudocode.py
+Pangu-Weather-for-copy/inference_iterative.py

@@ -1,0 +1,8 @@
+numpy
+onnx==1.13.1
+onnxruntime==1.14.0
+xarray
+netcdf4==1.5.8
+pydap==3.4.0
+matplotlib==3.6.3
+pandas
