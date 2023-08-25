@@ -21,8 +21,8 @@ from inference_helper import nan_extend, normalise, load_model
 
 LOG = logging.getLogger(__name__)
 
-weight_path = '/wk171/yungyun/FCN_test_from_ECMWF/ai-models/'
-# weight_path = 'model_weight'
+# weight_path = '/wk171/yungyun/FCN_test_from_ECMWF/ai-models/'
+weight_path = 'model_weight/'
 input_data_dir = 'input_data'# add inital time
 output_data_dir = 'output_data'
 
