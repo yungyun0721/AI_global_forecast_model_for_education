@@ -5,21 +5,29 @@
 請git clone下來
 
 進入複製下來的專案
-''' cd */Pangu-Weather-for-copy/ '''
+``` 
+cd */Pangu-Weather-for-copy/
+```
 
 為了確保每個專案的環境互不干擾，建議開啟虛擬環境(非必要，可以不執行，但可能會影響其他沒有版控的專案)
-''' python3 -m venv .venv '''
+```
+python3 -m venv .venv
+```
 
 進入虛擬環境(呈上，非必要)
-''' source .venv/bin/activate '''
+```
+source .venv/bin/activate
+```
 
 在虛擬環境安裝此專案之相依套件。在171請安裝CPU版本，因171的GPU記憶體不足，跑不動盤古模式。
-''' pip install -r requirements_cpu.txt '''
+```
+pip install -r requirements_cpu.txt
+```
 如執行後，遇到系統提示建議更新，則建議更新pip
 
 下載盤古模式。每個模式約1.1G，可從上面github連結下載，或使用軟連結至我載的24小時預報。
 盤古模式必須放在專案目錄，也就是
-
+```
 ├── root
 │   ├── input_data
 │   │   ├── input_surface.npy
@@ -32,12 +40,12 @@
 │   ├── inference_cpu.py
 │   ├── inference_gpu.py
 │   ├── inference_iterative.py
-
-''' ln -s /wk171/ytkuo/Pangu-Weather/pangu_weather_24.onnx 你的專案根目錄'''
-注意，由於我有可能會更改或移動專案位置，所以行有餘力時請直接複製或下載模式，但請注意儲存空間。
+```
 
 下載天氣資料，範例：
-''' python download_ncep.py --scheduled-time 2023072006 '''
+```
+python download_ncep.py --scheduled-time 2023072006
+```
 其中，2023072006代表2023年7月20號06Z的NCEP初始場，
 相關細節請見 https://nomads.ncep.noaa.gov/dods/gfs_0p25
 這個下載過程約需要兩分鐘
@@ -52,7 +60,9 @@
 將有可能影響他人的程式或影響定時排程。
 
 模式跑10天積分。如有需求更改請從inference_cpu.py第34行修改。
-''' python inference_cpu.py '''
+```
+python inference_cpu.py
+```
 
 在171及我設定的環境，每40秒可積分一天。執行後，output_data/底下會出現許多檔案，
 output_surface_0.npy
@@ -70,11 +80,15 @@ output_upper_X.npy的矩陣維度為(5,13,721,1440)，5依序代表Z, Q, T, U, V
 721與1440分別代表緯度與經度。
 
 關於output檔案的使用，以850mb繪圖為例，執行以下程式碼可看到850風速結果。
-''' cd plot/ '''
-''' python plot850.py '''
+```
+cd plot/ 
+python plot850.py
+```
 
 此命令會在plot/目錄底下生成圖片。
 
 離開專案，退出虛擬環境
-''' deactivate '''
+```
+deactivate
+```
 

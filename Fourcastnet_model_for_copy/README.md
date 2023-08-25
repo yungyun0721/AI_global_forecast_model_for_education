@@ -107,11 +107,15 @@ output_precipitation_Xh.npy的矩陣維度為(721,1440)，代表往前六小時�
 721與1440分別代表緯度與經度。
 
 關於output檔案的使用，以850mb繪圖為例，執行以下程式碼可看到850風速結果。
-''' cd plot/ '''
-''' python plot850.py '''
+``` 
+cd plot/ 
+python plot850.py 
+```
 
 此命令會在plot/目錄底下生成圖片。
 
 離開專案，退出虛擬環境
-''' deactivate '''
+```
+deactivate
+```
 
