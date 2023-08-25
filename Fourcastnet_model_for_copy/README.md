@@ -9,7 +9,7 @@ FourCastNet內部code
 
 進入複製下來的專案
 ```
-cd */Fourcastnet_model_copy/ 
+cd */Fourcastnet_model_for_copy/ 
 ```
 
 為了確保每個專案的環境互不干擾，建議開啟虛擬環境(非必要，可以不執行，但可能會影響其他沒有版控的專案)
