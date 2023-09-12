@@ -1,7 +1,6 @@
 import argparse
-
 import numpy as np
-import xarray
+import xarray, os
 
 def main(timestr: str) -> None:
     path = (
@@ -28,6 +27,8 @@ def main(timestr: str) -> None:
     upper = np.concatenate([height, specific_humidity, temperatrue, u, v], axis=0)
     sfc = np.concatenate([mslp, v10, u10, t2m], axis=0)
     
+    if not os.path.isdir('input_data'):
+        os.mkdir('input_data')
     np.save('./input_data/input_upper.npy', upper.astype(np.float32))    
     np.save('./input_data/input_surface.npy', sfc.astype(np.float32))  
     print('Done')
