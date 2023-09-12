@@ -1,7 +1,7 @@
 import argparse
 
 import numpy as np
-import xarray
+import xarray, os
 def main(timestr: str) -> None:
 
     path = (
@@ -56,6 +56,9 @@ def main(timestr: str) -> None:
     IC = np.concatenate([u10, v10, t2m, sp, mslp, t850, u1000, v1000, z1000,\
                         u850, v850, z850, u500, v500, z500, t500, z50, r500,\
                         r850, tcwv, wind_100u, wind_100v, u250, v250, z250, t250], axis=0)
+    
+    if not os.path.isdir('input_data'):
+        os.mkdir('input_data')
     np.save('./input_data/inital_condition.npy', IC.astype(np.float32))
     print('Done')
 
