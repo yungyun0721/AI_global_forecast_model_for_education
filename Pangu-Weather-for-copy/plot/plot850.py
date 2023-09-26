@@ -28,6 +28,17 @@ for file_name in file_list:
         
 print(f'files count: {files}')
 
+save_path = 'plot_output'
+if not os.path.isdir(save_path):
+    os.mkdir(save_path)
+
+wsp_lev = [0,4,6,8,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,36,38,40,43,46,49,52,55,58,61,64,67,70,73,76,79,82,85]
+wsp_color = ['#ffffff','#80ffff','#6fedf1','#5fdde4','#50cdd5','#40bbc7','#2facba','#1f9bac','#108c9f','#007a92',\
+             '#00b432','#33c341','#67d251','#99e060','#cbf06f','#ffff80','#ffdd52','#ffdc52','#ffa63e','#ff6d29','#ff3713','#ff0000','#d70000','#af0000','#870000','#5f0000',\
+             '#aa00ff','#b722fe','#c446ff','#d46aff','#e38dff','#f1b1ff','#ffd3ff',\
+             '#ffc6ea','#ffb6d5','#ffa6c1','#ff97ac','#ff8798','#fe7884','#ff696e','#ff595a','#e74954','#cc3a4c','#b22846','#9a1941']
+
+
 for i in range(files):
     print(i)
     data = np.load(f'../output_data/output_upper_{i}.npy')
@@ -36,7 +47,7 @@ for i in range(files):
     v =  np.flip(data[4, 2, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
     ws = (u**2+v**2)**0.5
 
-    contourf = plt.contourf(lon, lat, ws, levels=np.linspace(0,40,41), cmap='jet')
+    contourf = plt.contourf(lon, lat, ws, levels=wsp_lev, colors=wsp_color)
     plt.streamplot(lon, lat, u, v, color='k', linewidth=0.5, density=1.5)
 
     plt.plot(coast.lon_map, coast.lat_map, color='k', linewidth=0.7)
@@ -44,5 +55,5 @@ for i in range(files):
     plt.ylim([0,50])
     plt.colorbar(contourf)
     plt.title(f'+{i*24} hour, 850 mb Wind Speed')
-    plt.savefig(f'predict_{i*24}.png')
+    plt.savefig(f'./{save_path}/predict_{i*24}.png')
     plt.close()
