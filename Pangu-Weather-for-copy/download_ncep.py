@@ -25,7 +25,7 @@ def main(timestr: str) -> None:
     t2m = np.flip(ncep.tmp2m[0, :, :].values, axis=0).reshape(1, 721, 1440)
     
     upper = np.concatenate([height, specific_humidity, temperatrue, u, v], axis=0)
-    sfc = np.concatenate([mslp, v10, u10, t2m], axis=0)
+    sfc = np.concatenate([mslp, u10, v10, t2m], axis=0)
     
     if not os.path.isdir('input_data'):
         os.mkdir('input_data')
