@@ -5,4 +5,5 @@ xarray
 netcdf4==1.5.8
 pydap==3.4.0
 matplotlib==3.6.3
+importlib-metadata==4.13.0
 pandas
