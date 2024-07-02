@@ -1,0 +1,4 @@
+git+https://github.com/deepmind/graphcast.git
+dm-tree
+ipywidgets
+netCDF4
