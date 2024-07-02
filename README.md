@@ -1,2 +1,2 @@
 此github主要是讓大家能簡單使用AI_global預報模式
-現在已有FourCastNet以及Pangu-weather模式
+現在已有FourCastNet、Pangu-weather以及graphcast模式
