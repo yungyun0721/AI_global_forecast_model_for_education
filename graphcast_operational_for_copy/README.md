@@ -21,7 +21,7 @@ source .venv/bin/activate
 
 在虛擬環境安裝此專案之相依套件。
 ```
-pip install -r requirements_cpu.txt
+pip install -r graphcast_requirements.txt
 ```
 如果無法安裝成功，可嘗試用conda虛擬環境安裝
 如執行後，遇到系統提示建議更新，則建議更新pip
