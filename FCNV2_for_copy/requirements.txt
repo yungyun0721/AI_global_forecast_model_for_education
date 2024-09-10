@@ -1,0 +1,14 @@
+numpy
+torch
+einops
+timm
+logging
+xarray
+netcdf4==1.5.8
+pydap==3.4.0
+matplotlib==3.5.3
+pandas
+importlib-metadata==4.13.0
+torch_harmonics==0.6.2
+cdsapi
+ruamel.yaml

@@ -1,0 +1,11 @@
+format: jb-book
+root: intro
+chapters:
+- file: usage
+- file: batch
+- file: models
+- file: beware
+- file: finetuning
+- file: example_era5
+- file: example_hres_t0
+- file: api

@@ -1,0 +1,5 @@
+netCDF4
+xarray
+microsoft-aurora
+matplotlib==3.5.3
+# pip install --force-reinstall charset-normalizer==3.1.0
