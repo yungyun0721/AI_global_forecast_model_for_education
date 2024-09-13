@@ -48,7 +48,7 @@ weighting部分:
 或是直接使用我的weight
 在supporting_module中，inference_helper.py檔中第15行，更改weight位置
 ```
-model.load_checkpoint("weight/aurora-0.25-fintuned.ckpt", strict=False)
+model.load_checkpoint("weight/aurora-0.25-finetuned.ckpt", strict=False)
 ```
 注意，由於我有可能會更改或移動專案位置，所以行有餘力時請直接複製或下載weight，但請注意儲存空間。
 
