@@ -2,7 +2,6 @@ numpy
 torch
 einops
 timm
-logging
 xarray
 netcdf4==1.5.8
 pydap==3.4.0

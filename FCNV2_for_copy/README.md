@@ -27,9 +27,9 @@ conda activate FCNV2
 pip install --upgrade pip 
 ```
 
-在虛擬環境安裝此專案之相依套件。只寫cpu版本。
+在虛擬環境安裝此專案之相依套件。
 ``` 
-pip install -r requirements_cpu.txt 
+pip install -r requirements.txt 
 ```
 如執行後，遇到系統提示建議更新，則建議更新pip
 
@@ -83,7 +83,7 @@ python download_ncep.py --scheduled-time 2023072006
 這個下載過程約需要兩分鐘
 
 
-此步驟會下載一個檔案至*/input_data/aurora_input.npy。
+此步驟會下載一個檔案至*/input_data/inital_condition.npy。
 Fourcastnetv2將此檔作為初始場，此檔案須290M，請確保有足夠儲存空間。
 
 開始跑Fourcastnetv2模式。
@@ -92,17 +92,17 @@ Fourcastnetv2將此檔作為初始場，此檔案須290M，請確保有足夠儲
 模式跑10天積分。請改成一下指令。
 ```
 積分時間預設10天預報(40步階)
-python main.py --input_data input_data/aurora_input.nc --output_folder output_data
+python main.py --input_data input_data/inital_condition.npy --output_folder output_data
 
 更改積分時間(ex:3天預報時間)
-python main.py --input_data input_data/aurora_input.nc --output_folder output_data --fore_hr 72
+python main.py --input_data input_data/inital_condition.npy --output_folder output_data --fore_hr 72
 ```
 
 在82及我設定的環境，每10分鐘可積分6小時。執行後，output_data/底下會出現許多檔案，
 output_weather_0hr.npy
-output_weather_6hr.nc
-output_weather_12hr.nc
-output_weather_18hr.nc.......
+output_weather_6hr.npy
+output_weather_12hr.npy
+output_weather_18hr.npy.......
 
 
 _後的數字代表積分時間。
