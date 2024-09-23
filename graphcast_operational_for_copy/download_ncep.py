@@ -24,7 +24,7 @@ def main(timestr: str) -> None:
 
     lev = ncep1.lev
     target_lev = np.array([ 50, 100, 150, 200, 250, 300, 400, 500, 600, 700, 850, 925, 1000])
-    indices = np.where(np.isin(lev, target_lev))[0]
+    indices = np.flip(np.where(np.isin(lev, target_lev))[0])
     lon = np.arange(0, 360, 0.25).astype(np.float32)
     lat = np.arange(-90, 90.1, 0.25).astype(np.float32)
     time_test = np.array([  0,  21600000000000], dtype='timedelta64')
@@ -52,8 +52,8 @@ def main(timestr: str) -> None:
     # tp = np.concatenate((np.flip(ncep1.apcpsfc[0, :, :].values, axis=0).reshape(1, 1, 721, 1440),np.flip(ncep2.apcpsfc[0, :, :].values, axis=0).reshape(1, 1, 721, 1440)), axis=1)
 
     tp_nan = u10.copy()*np.nan
-    datetime_test =  pd.array([f'{timestr_front[:4]}-{timestr_front[4:6]}-{timestr_front[6:8]}T{timestr_front[8:]}:00:00.000000000', f'{timestr[:4]}-{timestr[4:6]}-{timestr[6:8]}T{timestr[8:]}:00:00.000000000'], dtype='datetime64').reshape([1,-1])
-    
+    datetime_test =  pd.array([datetime.datetime.strptime(timestr_front,"%Y%m%d%H").strftime("%Y-%m-%dT%H:00:00.000000000"), datetime.datetime.strptime(timestr,"%Y%m%d%H").strftime("%Y-%m-%dT%H:00:00.000000000") ], dtype='datetime64').reshape([1,2])
+
     inputs_ds = xarray.Dataset(
         data_vars={
             "geopotential_at_surface": (("lat", "lon"), np.array(geopotential_at_surface.variables['geopotential_at_surface'])),

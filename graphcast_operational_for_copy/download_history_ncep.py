@@ -83,7 +83,8 @@ for initial_i in range(len(time_list)):
     # tp = np.concatenate((np.flip(ncep1.apcpsfc[0, :, :].values, axis=0).reshape(1, 1, 721, 1440),np.flip(ncep2.apcpsfc[0, :, :].values, axis=0).reshape(1, 1, 721, 1440)), axis=1)
 
     tp_nan = u10.copy()*np.nan
-    datetime_test =  pd.array([f'{timestr_front[:4]}-{timestr_front[4:6]}-{timestr_front[6:8]}T{timestr_front[8:]}:00:00.000000000', f'{time_list[initial_i][:4]}-{time_list[initial_i][4:6]}-{time_list[initial_i][6:8]}T{time_list[initial_i][8:]}:00:00.000000000'], dtype='datetime64').reshape([1,-1])
+    # datetime_test =  pd.array([f'{timestr_front[:4]}-{timestr_front[4:6]}-{timestr_front[6:8]}T{timestr_front[8:]}:00:00.000000000', f'{time_list[initial_i][:4]}-{time_list[initial_i][4:6]}-{time_list[initial_i][6:8]}T{time_list[initial_i][8:]}:00:00.000000000'], dtype='datetime64').reshape([1,-1])
+    datetime_test =  pd.array([datetime.datetime.strptime(timestr_front,"%Y%m%d%H").strftime("%Y-%m-%dT%H:00:00.000000000"), datetime.datetime.strptime(time_list[initial_i],"%Y%m%d%H").strftime("%Y-%m-%dT%H:00:00.000000000") ], dtype='datetime64').reshape([1,2])
 
     inputs_ds = xarray.Dataset(
         data_vars={
