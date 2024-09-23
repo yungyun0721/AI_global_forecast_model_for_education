@@ -52,7 +52,7 @@ def main(timestr: str) -> None:
     # tp = np.concatenate((np.flip(ncep1.apcpsfc[0, :, :].values, axis=0).reshape(1, 1, 721, 1440),np.flip(ncep2.apcpsfc[0, :, :].values, axis=0).reshape(1, 1, 721, 1440)), axis=1)
 
     tp_nan = u10.copy()*np.nan
-    datetime_test =  pd.array([datetime.datetime.strptime(timestr_front,"%Y%m%d%H").strftime("%Y-%m-%dT%H:00:00.000000000"), datetime.datetime.strptime(timestr,"%Y%m%d%H").strftime("%Y-%m-%dT%H:00:00.000000000") ], dtype='datetime64').reshape([1,2])
+    datetime_test =  pd.array([datetime.datetime.strptime(timestr_front,"%Y%m%d%H"), datetime.datetime.strptime(timestr,"%Y%m%d%H")]).reshape([1,2])
 
     inputs_ds = xarray.Dataset(
         data_vars={
