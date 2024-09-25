@@ -1,5 +1,3 @@
-import argparse
-
 import requests
 import os
 import pygrib as pg
