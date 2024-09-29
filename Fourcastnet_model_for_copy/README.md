@@ -11,7 +11,7 @@ FourCastNet內部code
 ```
 cd */Fourcastnet_model_for_copy/ 
 ```
-
+需python 3.10以上的版本才可(有conda可使用conda的虛擬環境指定python 3.10的版本)
 為了確保每個專案的環境互不干擾，建議開啟虛擬環境(非必要，可以不執行，但可能會影響其他沒有版控的專案)
 ```
 python3 -m venv FCN_env 
