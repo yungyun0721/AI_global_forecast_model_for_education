@@ -12,7 +12,7 @@ def aurora_model(input_dir, output_folder, fore_hour=72):
     # model = AuroraSmall()
     model = Aurora(use_lora=False)
     # model.load_checkpoint("weight/aurora-0.25-pretrained.ckpt")
-    model.load_checkpoint("weight/aurora-0.25-fintuned.ckpt", strict=False)
+    model.load_checkpoint("weight/aurora-0.25-finetuned.ckpt", strict=False)
 
     input_iter = xarray.load_dataset(input_dir)
     # need to 2 time (docs/reference to example_era5.ipynb and aroura/rollout.py)
@@ -30,7 +30,7 @@ def aurora_model(input_dir, output_folder, fore_hour=72):
     print('predicting....')
     model.eval()
     torch.set_num_threads(cpu_num)
-    for time_index in range(np.int_(fore_hour/6)):
+    for time_index in range(np.int_(np.int_(fore_hour)/6)):
 
         with torch.inference_mode():
             prediction = model.forward(batch)

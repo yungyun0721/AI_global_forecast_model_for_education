@@ -56,7 +56,7 @@ output_data_path2 = ncep_path + files[1][idx+1:]
 grib_file1 = pg.open(output_data_path1)
 grib_file2 = pg.open(output_data_path2)
 
-lat = np.arange(-90, 90.1, 0.25).astype(np.float32)
+lat = np.arange(-90, 90, 0.25).astype(np.float32)
 lon = np.arange(0, 360, 0.25).astype(np.float32)
 
 height1 = np.full([13,721,1440],np.nan)

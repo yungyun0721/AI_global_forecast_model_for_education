@@ -192,7 +192,7 @@ class Aurora(torch.nn.Module):
             rollout_step=batch.metadata.rollout_step,
         )
         
-        print('I still alive. XD--------------------------')
+        print('I am still alive. XD--------------------------')
         pred = self.decoder(
             x,
             batch,
