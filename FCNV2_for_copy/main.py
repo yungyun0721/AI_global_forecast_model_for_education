@@ -2,7 +2,7 @@ import argparse
 from modules.inference_weather import FCN2_weather
 
 def main(input_data, output_folder, fore_hr, device='cpu'):
-    FCN2_weather(input_data, output_folder, fore_hr, device='cpu')
+    FCN2_weather(input_data, output_folder, fore_hr, device=device)
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
