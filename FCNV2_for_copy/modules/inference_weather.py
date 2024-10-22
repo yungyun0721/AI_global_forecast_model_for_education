@@ -41,10 +41,10 @@ ordering = [ "10u",   "10v", "100u", "100v",   "2t",   "sp",  "msl", "tcwv",\
 # load model and parameters
 global_means, global_stds = load_statistics(weight_path_global, channels = 73)
 backbone_ckpt = os.path.join(weight_path_global, "weights.tar")
-backbone_model = load_model(backbone_ckpt, device=device)
 
 def FCN2_weather(input_file, output_dir, fore_hour=240, device=device):
-    
+
+    backbone_model = load_model(backbone_ckpt, device=device)    
     torch.set_num_threads(cpu_num)
     fore_hour = np.int_(fore_hour)
     # save output FCN_weather
