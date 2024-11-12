@@ -8,6 +8,11 @@ import os
 plt.ioff()  
 
 coast = pd.read_csv('coast.csv')
+data_source_file = '../output_data/'
+save_file = 'plot_figure/'
+
+if not os.path.isdir(save_file):
+    os.mkdir(save_file)
 
 lat = np.linspace(-90,90,721)
 lon = np.linspace(0,359.75,1440)
@@ -21,7 +26,7 @@ lat = lat[lat_min:lat_max]
 lon = lon[lon_min:lon_max]
 
 files = 0
-file_list = os.listdir('../output_data/')
+file_list = os.listdir(data_source_file)
 for file_name in file_list:
     if file_name.startswith('output_weather'):
         files += 1
@@ -36,7 +41,7 @@ wsp_color = ['#ffffff','#80ffff','#6fedf1','#5fdde4','#50cdd5','#40bbc7','#2facb
 
 for i in range(files):
     print(i)
-    data = np.load(f'../output_data/output_weather_{(i)*6}h.npy')
+    data = np.load(f'{data_source_file}output_weather_{(i)*6}h.npy')
 
     # u = np.flip(data[7+13*2+11, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
     # v =  np.flip(data[7+13*3+11, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
@@ -52,5 +57,5 @@ for i in range(files):
     plt.ylim([0,50])
     plt.colorbar(contourf)
     plt.title(f'+{i*6} hour, 850 mb Wind Speed')
-    plt.savefig(f'predict_{i*6}.png')
+    plt.savefig(f'{save_file}predict_{i*6}.png')
     plt.close()
