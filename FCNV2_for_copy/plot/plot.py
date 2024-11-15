@@ -45,7 +45,7 @@ def plot_figure(data_source_file, save_file):
         print(i)
 
         data = np.load(f"{data_source_file}/output_weather_{(i)*6}h.npy")
-        fig, ax = plt.subplots(2, 2, figsize=(12, 8), dpi=200)
+        fig, ax = plt.subplots(2, 3, figsize=(16, 9), dpi=200)
         ax = ax.flatten()
 
         #########################
@@ -89,17 +89,17 @@ def plot_figure(data_source_file, save_file):
         cax = divider.append_axes("right", size="5%", pad=0.05)
         plt.colorbar(a0, cax=cax)
 
-        ### 850 hPa
-        u = np.flip(data[18, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
-        v = np.flip(data[31, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
-        t = np.flip(data[57, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        ### 925 hPa
+        u = np.flip(data[19, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        v = np.flip(data[32, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        t = np.flip(data[58, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
         ws = (u**2 + v**2) ** 0.5
         a1 = ax[1].imshow(
-            t - 273.15,
-            cmap=make_cmap("clist_temp"),
+            ws,
+            cmap=make_cmap("clist_WS"),
             origin="lower",
-            vmin=-15,
-            vmax=26,
+            vmin=0,
+            vmax=40,
         )
         ax[1].plot(
             (coast.lon_map - 90) / 0.25,
@@ -107,43 +107,7 @@ def plot_figure(data_source_file, save_file):
             color="k",
             linewidth=0.7,
         )
-        ax[1].quiver(
-            X[::4, ::4],
-            Y[::4, ::4],
-            u[::4, ::4],
-            v[::4, ::4],
-            angles="xy",
-            scale_units="xy",
-            scale=3.5,
-        )
-        ax[1].set_title("Wind and Temperature (shaded, $^{o}$C) at 850hPa")
-        ax[1].set_xticks(np.arange(0, 261, 40), np.arange(90, 156, 10))
-        ax[1].set_yticks(np.arange(0, 201, 40), np.arange(0, 51, 10))
-        ax[1].set_xlim([0, 261])
-        ax[1].set_ylim([0, 201])
-        divider = make_axes_locatable(ax[1])
-        cax = divider.append_axes("right", size="5%", pad=0.05)
-        plt.colorbar(a1, cax=cax)
-
-        ### 700 hPa
-        u = np.flip(data[17, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
-        v = np.flip(data[30, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
-        rh = np.flip(data[69, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
-        ws = (u**2 + v**2) ** 0.5
-        a2 = ax[2].imshow(
-            rh,
-            cmap="gist_earth_r",
-            origin="lower",
-            vmin=50,
-            vmax=110,
-        )
-        ax[2].plot(
-            (coast.lon_map - 90) / 0.25,
-            (coast.lat_map - 0) / 0.25,
-            color="k",
-            linewidth=0.7,
-        )
-        ax[2].streamplot(
+        ax[1].streamplot(
             np.arange(0, 261, 1),
             np.arange(0, 201, 1),
             u,
@@ -152,7 +116,43 @@ def plot_figure(data_source_file, save_file):
             color="k",
             linewidth=0.4,
         )
-        ax[2].set_title("Wind and Relative Humidity (shaded, %) at 700hPa")
+        ax[1].set_title("Wind Speed (shaded, m s$^{-1}$) at 925hPa")
+        ax[1].set_xticks(np.arange(0, 261, 40), np.arange(90, 156, 10))
+        ax[1].set_yticks(np.arange(0, 201, 40), np.arange(0, 51, 10))
+        ax[1].set_xlim([0, 261])
+        ax[1].set_ylim([0, 201])
+        divider = make_axes_locatable(ax[1])
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        plt.colorbar(a1, cax=cax)
+
+        ### 850 hPa
+        u = np.flip(data[18, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        v = np.flip(data[31, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        t = np.flip(data[57, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        ws = (u**2 + v**2) ** 0.5
+        a2 = ax[2].imshow(
+            t - 273.15,
+            cmap=make_cmap("clist_temp"),
+            origin="lower",
+            vmin=-15,
+            vmax=26,
+        )
+        ax[2].plot(
+            (coast.lon_map - 90) / 0.25,
+            (coast.lat_map - 0) / 0.25,
+            color="k",
+            linewidth=0.7,
+        )
+        ax[2].quiver(
+            X[::4, ::4],
+            Y[::4, ::4],
+            u[::4, ::4],
+            v[::4, ::4],
+            angles="xy",
+            scale_units="xy",
+            scale=3.2,
+        )
+        ax[2].set_title("Wind and Temperature (shaded, $^{o}$C) at 850hPa")
         ax[2].set_xticks(np.arange(0, 261, 40), np.arange(90, 156, 10))
         ax[2].set_yticks(np.arange(0, 201, 40), np.arange(0, 51, 10))
         ax[2].set_xlim([0, 261])
@@ -161,7 +161,43 @@ def plot_figure(data_source_file, save_file):
         cax = divider.append_axes("right", size="5%", pad=0.05)
         plt.colorbar(a2, cax=cax)
 
-        ### 500 hPa
+        ### 700 hPa
+        u = np.flip(data[17, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        v = np.flip(data[30, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        rh = np.flip(data[69, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        ws = (u**2 + v**2) ** 0.5
+        a3 = ax[3].imshow(
+            rh,
+            cmap="gist_earth_r",
+            origin="lower",
+            vmin=50,
+            vmax=110,
+        )
+        ax[3].plot(
+            (coast.lon_map - 90) / 0.25,
+            (coast.lat_map - 0) / 0.25,
+            color="k",
+            linewidth=0.7,
+        )
+        ax[3].streamplot(
+            np.arange(0, 261, 1),
+            np.arange(0, 201, 1),
+            u,
+            v,
+            density=[1.5, 1.5],
+            color="k",
+            linewidth=0.4,
+        )
+        ax[3].set_title("Wind and Relative Humidity (shaded, %) at 700hPa")
+        ax[3].set_xticks(np.arange(0, 261, 40), np.arange(90, 156, 10))
+        ax[3].set_yticks(np.arange(0, 201, 40), np.arange(0, 51, 10))
+        ax[3].set_xlim([0, 261])
+        ax[3].set_ylim([0, 201])
+        divider = make_axes_locatable(ax[3])
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        plt.colorbar(a3, cax=cax)
+
+        ### 500 hPa Streamline
         u = np.flip(data[15, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
         v = np.flip(data[28, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
         z = np.flip(data[41, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
@@ -171,33 +207,74 @@ def plot_figure(data_source_file, save_file):
         vor_v = (v[:, 1:] - v[:, 0:-1]) / 25000
         vor_v = np.concatenate((np.reshape(vor_v[:, 0], (201, 1)), vor_v), axis=1)
         vor = vor_u * (-1) + vor_v
-        a3 = ax[3].imshow(
+        a4 = ax[4].imshow(
             10**5 * vor,
             cmap="bwr",
             origin="lower",
             vmin=-60,
             vmax=60,
         )
-        ax[3].plot(
+        ax[4].plot(
             (coast.lon_map - 90) / 0.25,
             (coast.lat_map - 0) / 0.25,
             color="k",
             linewidth=0.7,
         )
-        ax[3].contour(
+        ax[4].streamplot(
+            np.arange(0, 261, 1),
+            np.arange(0, 201, 1),
+            u,
+            v,
+            density=[1.5, 1.5],
+            color="k",
+            linewidth=0.4,
+        )
+        ax[4].set_title("Wind and Vorticity (10$^{-5}$ s$^{-1}$) at 500hPa")
+        ax[4].set_xticks(np.arange(0, 261, 40), np.arange(90, 156, 10))
+        ax[4].set_yticks(np.arange(0, 201, 40), np.arange(0, 51, 10))
+        ax[4].set_xlim([0, 261])
+        ax[4].set_ylim([0, 201])
+        divider = make_axes_locatable(ax[4])
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        plt.colorbar(a4, cax=cax)
+
+        ### 500 hPa vorticity
+        u = np.flip(data[15, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        v = np.flip(data[28, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        z = np.flip(data[41, :, :], axis=0)[lat_min:lat_max, lon_min:lon_max]
+        ws = (u**2 + v**2) ** 0.5
+        vor_u = (u[1:, :] - u[0:-1, :]) / 25000
+        vor_u = np.concatenate((np.reshape(vor_u[0, :], (1, 261)), vor_u), axis=0)
+        vor_v = (v[:, 1:] - v[:, 0:-1]) / 25000
+        vor_v = np.concatenate((np.reshape(vor_v[:, 0], (201, 1)), vor_v), axis=1)
+        vor = vor_u * (-1) + vor_v
+        a5 = ax[5].imshow(
+            10**5 * vor,
+            cmap="bwr",
+            origin="lower",
+            vmin=-60,
+            vmax=60,
+        )
+        ax[5].plot(
+            (coast.lon_map - 90) / 0.25,
+            (coast.lat_map - 0) / 0.25,
+            color="k",
+            linewidth=0.7,
+        )
+        ax[5].contour(
             z / 10,
             levels=np.arange(5400, 6001, 40),
             colors="k",
             linewidths=0.6,
         )
-        ax[3].set_title("Geopotential and Vorticity (10$^{-5}$ s$^{-1}$) at 500hPa")
-        ax[3].set_xticks(np.arange(0, 261, 40), np.arange(90, 156, 10))
-        ax[3].set_yticks(np.arange(0, 201, 40), np.arange(0, 51, 10))
-        ax[3].set_xlim([0, 261])
-        ax[3].set_ylim([0, 201])
-        divider = make_axes_locatable(ax[3])
+        ax[5].set_title("Geopotential and Vorticity (10$^{-5}$ s$^{-1}$) at 500hPa")
+        ax[5].set_xticks(np.arange(0, 261, 40), np.arange(90, 156, 10))
+        ax[5].set_yticks(np.arange(0, 201, 40), np.arange(0, 51, 10))
+        ax[5].set_xlim([0, 261])
+        ax[5].set_ylim([0, 201])
+        divider = make_axes_locatable(ax[5])
         cax = divider.append_axes("right", size="5%", pad=0.05)
-        plt.colorbar(a3, cax=cax)
+        plt.colorbar(a5, cax=cax)
 
         fig.suptitle(f"[+{i*6:0>3}h]", fontsize=20)
         plt.savefig(f"{save_file}/predict_{i*6:0>3}.png", facecolor="white")
