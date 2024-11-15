@@ -45,7 +45,7 @@ def main(timestr: str) -> None:
     
     if not os.path.isdir('input_data'):
         os.mkdir('input_data')
-    np.save('./input_data/inital_condition.npy', IC.astype(np.float32))
+    np.save('./input_data/initial_condition.npy', IC.astype(np.float32))
     print('Done')
 
 
