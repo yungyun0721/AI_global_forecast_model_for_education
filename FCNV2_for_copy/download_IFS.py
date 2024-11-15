@@ -6,7 +6,7 @@ def main(timestr: str) -> None:
 
     if not os.path.isdir('input_data'):
         os.mkdir('input_data')
-    save_folder = 'input_data/initial_condition.npy'
+    save_folder = 'input_data/initial_condition_IFS.npy'
     grib_save = 'input_data/IFS_IC.grib2'
     download_name =f'https://storage.googleapis.com/ecmwf-open-data/{timestr[:8]}/{timestr[8:]}z/ifs/0p25/oper/{timestr}0000-0h-oper-fc.grib2'
     print(download_name)
