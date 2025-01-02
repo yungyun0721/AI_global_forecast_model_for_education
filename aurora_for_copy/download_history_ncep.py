@@ -6,7 +6,7 @@ import numpy as np
 import xarray
 import pandas as pd
 import datetime
-##https://data.rda.ucar.edu/ds084.1/2022/20220525/gfs.0p25.2022052500.f000.grib2
+##https://data.rda.ucar.edu/d084001/2022/20220525/gfs.0p25.2022052500.f000.grib2
 
 timestr = '2023072600'
 
@@ -28,7 +28,7 @@ for file in files:
         ofile = ncep_path + file
     print(ofile)
 
-    response = requests.get("https://data.rda.ucar.edu/ds084.1/" + file)
+    response = requests.get("https://data.rda.ucar.edu/d084001/" + file)
     with open(ofile, "wb") as f:
         f.write(response.content)
         f.close()

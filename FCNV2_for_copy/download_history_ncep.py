@@ -3,7 +3,7 @@ import os
 import pygrib as pg
 import numpy as np
 ##https://data.rda.ucar.edu/ds084.1/2022/20220525/gfs.0p25.2022052500.f000.grib2
-
+##https://data.rda.ucar.edu/d084001/2023/20230116/gfs.0p25.2023011600.f000.grib2
 time_list = ['2023072600']
 # Set the path for saving NCEP GFS file(s)
 ncep_path = f'input_data/'
@@ -21,7 +21,7 @@ for file in files:
         ofile = ncep_path + file
     print(ofile)
 
-    response = requests.get("https://data.rda.ucar.edu/ds084.1/" + file)
+    response = requests.get("https://data.rda.ucar.edu/d084001/" + file)
     with open(ofile, "wb") as f:
         f.write(response.content)
         f.close()

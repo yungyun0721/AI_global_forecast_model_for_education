@@ -1,5 +1,4 @@
 import argparse
-
 import numpy as np
 import xarray, os
 def main(timestr: str) -> None:
