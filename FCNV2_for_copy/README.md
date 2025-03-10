@@ -141,11 +141,11 @@ deactivate
 ## 接FCNV1 雨量
 需下載FCNV1的雨量模型的weight與global_means.npy 及 global_stds.npy
 FCNV1 weighting部分:
-> 預報6hr雨量只需20個變數
->> precip_model: https://portal.nersc.gov/project/m4134/FCN_weights_v0/ 中 precip.ckpt
+* 預報6hr雨量只需20個變數
+    * precip_model: https://portal.nersc.gov/project/m4134/FCN_weights_v0/ 中 precip.ckpt
 
-> 其他變數:
->> https://portal.nersc.gov/project/m4134/FCN_weights_v0.1/stats_v0.1/ 需下載 global_means.npy 及 global_stds.npy (FourCastNet變數前期處理會用到)
+* 其他變數:
+    * https://portal.nersc.gov/project/m4134/FCN_weights_v0.1/stats_v0.1/ 需下載 global_means.npy 及 global_stds.npy (FourCastNet變數前期處理會用到)
 
 或是直接使用我的weight
 modules/FCNV2_toFCN_precip.py檔中，更改weight_path位置
