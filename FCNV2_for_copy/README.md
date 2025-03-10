@@ -57,8 +57,10 @@ FourCastNetv2完成安裝後，目錄如下
 │   ├── input_data
 │   │   ├── initial_condition.npy
 │   ├── modules
+│   │   ├── afnonet.py
+│   │   ├── FCNV2_to_FCN_precip.py
 │   │   ├── inference_helper.py
-│   │   ├── inference_helper.py
+│   │   ├── inference_weather.py
 │   ├── output_data
 │   ├── plot
 │   │   ├── coast.csv
@@ -135,4 +137,37 @@ python plot850.py
 ```
 deactivate
 ```
+
+接FCNV1 雨量
+需下載FCNV1的雨量模型的weight與global_means.npy 及 global_stds.npy
+FCNV1 weighting部分:
+    預報6hr雨量只需20個變數
+    precip_model: https://portal.nersc.gov/project/m4134/FCN_weights_v0/ 中 precip.ckpt
+
+    其他變數:
+    https://portal.nersc.gov/project/m4134/FCN_weights_v0.1/stats_v0.1/
+    需下載 global_means.npy 及 global_stds.npy (FourCastNet變數前期處理會用到)
+
+或是直接使用我的weight
+modules/FCNV2_toFCN_precip.py檔中，更改weight_path位置
+請新增一個資料夾為weight_precip，將FCNV1的雨量權重放入
+
+請新增一個資料夾如下
+```
+├── root
+│   ├── weight_precip
+│   │   ├── global_means.npy
+│   │   ├── global_stds.npy
+│   │   ├── precip.ckpt
+
+```
+
+將FCNV2跑完的資料放入到FCNV1雨量模式做預報，範例：
+```
+python main.py --input_data output_data --output_folder output_precip  --action FCNV1_precip
+```
+即可完成用FCNV2預報場推估雨量
+
+
+
 
