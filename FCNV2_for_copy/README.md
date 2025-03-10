@@ -138,7 +138,7 @@ python plot850.py
 deactivate
 ```
 
-接FCNV1 雨量
+## 接FCNV1 雨量
 需下載FCNV1的雨量模型的weight與global_means.npy 及 global_stds.npy
 FCNV1 weighting部分:
     預報6hr雨量只需20個變數
