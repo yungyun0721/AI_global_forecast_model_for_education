@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 
-output_folder = '/bk2/yungyun/dwp/graphcast/output_data_2022052600/'
+output_folder = '../output_data/'
 output_files = os.listdir(output_folder)
 output_files.sort()
 coast = pd.read_csv('coast.csv')
