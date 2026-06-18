@@ -26,6 +26,16 @@ pip install -r graphcast_requirements.txt
 如果無法安裝成功，可嘗試用conda虛擬環境安裝
 如執行後，遇到系統提示建議更新，則建議更新pip
 
+下載權重 https://console.cloud.google.com/storage/browser/dm_graphcast 
+目前下載operational權重
+```
+cd graphcast_weight
+mkdir params
+cd params
+wget https://storage.googleapis.com/dm_graphcast/graphcast/params/GraphCast_operational%20-%20ERA5-HRES%201979-2021%20-%20resolution%200.25%20-%20pressure%20levels%2013%20-%20mesh%202to6%20-%20precipitation%20output%20only.npz -O params_GraphCast_operational.npz
+
+```
+
 下載模式及其他需要的資料創立graphcast_weight的資料夾
 可參考現有的graphcast_weight資料夾(stats與parms)
 **現在僅可使用graphcast operational版本**
