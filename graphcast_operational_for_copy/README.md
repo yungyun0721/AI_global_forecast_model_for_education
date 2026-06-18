@@ -50,7 +50,7 @@ graphcast模式必須放在專案目錄，也就是
 │   │   │   ├── stats_diffs_stddev_by_level.nc
 │   │   │   ├── stats_mean_by_level.nc
 │   │   │   ├── stats_stddev_by_level.nc
-│   │   ├── parms
+│   │   ├── params
 │   │   │   ├── params_GraphCast_operational.npz
 │   ├── input_data
 │   │   ├── graphcast_input_data.nc
