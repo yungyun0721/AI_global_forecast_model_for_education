@@ -10,9 +10,10 @@ output_files = os.listdir(output_folder)
 output_files.sort()
 coast = pd.read_csv('coast.csv')
 
-save_folder = 'plt_save'
-if not os.path.isdir(output_folder):
-    os.mkdir(output_folder)
+save_folder = 'plot_save'
+os.makedirs(save_folder, exist_ok=True)
+# if not os.path.isdir(output_folder):
+#     os.mkdir(output_folder)
 
 
 precip_lev =  [0, 0.5, 1, 2, 6, 10, 15, 20, 30, 40, 50, 70, 90, 110, 130,150,200,300,400]

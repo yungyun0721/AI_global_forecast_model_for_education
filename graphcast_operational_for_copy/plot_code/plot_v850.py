@@ -10,9 +10,8 @@ output_files = os.listdir(output_folder)
 output_files.sort()
 coast = pd.read_csv('coast.csv')
 
-save_folder = 'plt_save'
-if not os.path.isdir(output_folder):
-    os.mkdir(output_folder)
+save_folder = 'plot_save'
+os.makedirs(save_folder, exist_ok=True)
 
 wsp_lev = [0,4,6,8,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,36,38,40,43,46,49,52,55,58,61,64,67,70,73,76,79,82,85]
 wsp_color = ['#ffffff','#80ffff','#6fedf1','#5fdde4','#50cdd5','#40bbc7','#2facba','#1f9bac','#108c9f','#007a92',\

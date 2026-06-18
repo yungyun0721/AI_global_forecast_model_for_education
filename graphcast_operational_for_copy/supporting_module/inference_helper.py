@@ -147,7 +147,7 @@ def graphcast_model(input_data, output_folder, fore_hr):
         output_predictions['land_sea_mask'] = (('lat', 'lon'), np.array(example_batch.variables['land_sea_mask']))
 
 
-        save_path = f'{output_folder}/gc_operational_predict_data_{i+1}.nc'
+        save_path = f'{output_folder}/gc_operational_predict_data_{(i+1):0>2}.nc'
         output_predictions.to_netcdf(save_path)
         print(f'finish predict {(i+1)*6}hr')
 
