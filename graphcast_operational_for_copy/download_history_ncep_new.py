@@ -210,7 +210,7 @@ def main(IC_time: str)-> None:
         },
     )
 
-    output_path = "input_data/GFS_initial_condition.nc"
+    output_path = "input_data/graphcast_input_data.nc"
     inputs_ds.to_netcdf(output_path)
     print(f"Saved to {output_path}")
 
