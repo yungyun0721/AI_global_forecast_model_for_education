@@ -143,7 +143,6 @@ def main(IC_time: str)-> None:
     os.makedirs("input_data", exist_ok=True)
     
     all_data = [read_one_time(t) for t in time_list]
-    print(all_data)
     lat = all_data[0]["lat"]
     lon = all_data[0]["lon"]
 
