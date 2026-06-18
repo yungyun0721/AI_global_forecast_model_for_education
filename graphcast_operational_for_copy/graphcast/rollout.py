@@ -108,9 +108,13 @@ def chunked_prediction_generator(
   """
 
   # Create copies to avoid mutating inputs.
-  inputs = xarray.Dataset(inputs)
-  targets_template = xarray.Dataset(targets_template)
-  forcings = xarray.Dataset(forcings)
+  # inputs = xarray.Dataset(inputs)
+  # targets_template = xarray.Dataset(targets_template)
+  # forcings = xarray.Dataset(forcings)
+  
+  inputs = inputs.copy(deep=True)
+  targets_template = targets_template.copy(deep=True)
+  forcings = forcings.copy(deep=True)
 
   if "datetime" in inputs.coords:
     del inputs.coords["datetime"]

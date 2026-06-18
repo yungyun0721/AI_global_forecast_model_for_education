@@ -97,17 +97,19 @@ def graphcast_model(input_data, output_folder, fore_hr):
     if not os.path.isdir(output_folder):
         os.mkdir(output_folder)
     print('start predict loop......')
-    for i in range(np.int_(fore_hr/6)):
+    for i in range(np.int_(np.int_(fore_hr)/6)):
         if i==0:
             sample_batch_new = example_batch.copy()*np.nan
-            sample_batch_new.coords['datetime'] = (('batch','time'),pd.array(example_batch.coords['datetime'])+datetime.timedelta(hours=12))
+            sample_batch_new.coords['datetime'] = example_batch.coords['datetime'] + np.timedelta64(12, 'h')
+            # sample_batch_new.coords['datetime'] = (('batch','time'),pd.array(example_batch.coords['datetime'])+datetime.timedelta(hours=12))
             sample_batch_new = sample_batch_new.drop_sel(time=['0 days 06:00:00'])
             input_batch = xarray.concat([example_batch,sample_batch_new], dim='time')
             # example_batch = .drop('toa_incident_solar_radiation')
         else:
         # gain new input batch
             input_batch = input_batch.drop_sel(time=['0 days 00:00:00','0 days 12:00:00'])
-            sample_batch_new.coords['datetime'] = (('batch','time'),pd.array(output_predictions.coords['datetime'])+datetime.timedelta(hours=6))
+            sample_batch_new.coords['datetime'] = output_predictions.coords['datetime'] + np.timedelta64(12, 'h')
+            # sample_batch_new.coords['datetime'] = (('batch','time'),pd.array(output_predictions.coords['datetime'])+datetime.timedelta(hours=6))
             input_batch = xarray.concat([input_batch,output_predictions,sample_batch_new], dim='time')
             # example_batch = .drop('toa_incident_solar_radiation')
         input_batch.coords['time'] = pd.array(['0 days 00:00:00', '0 days 06:00:00','0 days 12:00:00'], dtype='timedelta64[ns]')
@@ -128,7 +130,8 @@ def graphcast_model(input_data, output_folder, fore_hr):
 
         # save 6hr predict data
         output_predictions = sample_batch_new.copy()
-        output_predictions.coords['datetime'] = (('batch','time'),pd.array(sample_batch_new.coords['datetime']))
+        output_predictions.coords["datetime"] = (("batch", "time"), sample_batch_new.coords["datetime"].values)
+        # output_predictions.coords['datetime'] = (('batch','time'),pd.array(sample_batch_new.coords['datetime']))
         output_predictions['2m_temperature'] = (("batch", "time", "lat", "lon"), np.array(predictions.variables['2m_temperature']))
         output_predictions['mean_sea_level_pressure'] = (("batch", "time", "lat", "lon"), np.array(predictions.variables['mean_sea_level_pressure']))
         output_predictions['10m_u_component_of_wind'] = (("batch", "time", "lat", "lon"), np.array(predictions.variables['10m_u_component_of_wind']))
@@ -142,8 +145,6 @@ def graphcast_model(input_data, output_folder, fore_hr):
         output_predictions['specific_humidity'] = (("batch", "time", "level", "lat", "lon"), np.array(predictions.variables['specific_humidity']))
         output_predictions['geopotential_at_surface'] = (('lat', 'lon'), np.array(example_batch.variables['geopotential_at_surface']))
         output_predictions['land_sea_mask'] = (('lat', 'lon'), np.array(example_batch.variables['land_sea_mask']))
-
-
 
 
         save_path = f'{output_folder}/gc_operational_predict_data_{i+1}.nc'
