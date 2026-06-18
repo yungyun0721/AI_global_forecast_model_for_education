@@ -33,7 +33,7 @@ cd graphcast_weight
 mkdir params
 cd params
 wget https://storage.googleapis.com/dm_graphcast/graphcast/params/GraphCast_operational%20-%20ERA5-HRES%201979-2021%20-%20resolution%200.25%20-%20pressure%20levels%2013%20-%20mesh%202to6%20-%20precipitation%20output%20only.npz -O params_GraphCast_operational.npz
-
+cd ../../
 ```
 
 下載模式及其他需要的資料創立graphcast_weight的資料夾
