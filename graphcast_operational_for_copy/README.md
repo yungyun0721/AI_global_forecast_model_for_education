@@ -60,9 +60,9 @@ graphcast模式必須放在專案目錄，也就是
 
 下載天氣資料，範例：
 ```
-python download_ncep.py --scheduled-time 2023072006
+python download_IFS.py --scheduled-time 2023072006
 ```
-其中，2023072006代表2023年7月20號06Z的NCEP初始場，
+其中，2023072006代表2023年7月20號06Z的IFS初始場，
 相關細節請見 https://nomads.ncep.noaa.gov/dods/gfs_0p25
 這個下載過程約需要兩分鐘
 
